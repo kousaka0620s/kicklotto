@@ -66,7 +66,7 @@ def logout():
 def confirm():
     if count_winners() >= MAX_WINNERS:
         return render_template('result.html', result='ガチャは終了しました。')
-    if random.random() < 0.2:
+    if random.random() < 0.02:
         return render_template('winner_form.html')
     else:
         return render_template('result.html', result='ハズレ…また挑戦してね！')
@@ -75,7 +75,7 @@ def confirm():
 def gacha():
     if count_winners() >= MAX_WINNERS:
         return render_template('result.html', result='ガチャは終了しました。')
-    if random.random() < 0.2:
+    if random.random() < 0.02:
         return render_template('winner_form.html')
     else:
         return render_template('result.html', result='ハズレ…')
