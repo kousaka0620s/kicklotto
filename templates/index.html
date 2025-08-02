@@ -61,6 +61,10 @@
   </style>
 </head>
 <body class="crazy-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+  <div class="fixed top-4 left-4 z-50">
+    <img src="{{ url_for('static', filename='images/kicklottoロゴ.png') }}" alt="kicklottoロゴ" class="w-20 h-auto">
+  </div>
+
   <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30"></div>
 
   <div class="relative text-center p-6 sm:p-10 bg-white bg-opacity-90 rounded-3xl shadow-2xl max-w-6xl w-full z-10">
@@ -92,6 +96,12 @@
       <img src="{{ url_for('static', filename='images/air_force1_black.jpg') }}" alt="Nike Air Force 1 Black"
            class="w-45 h-45 sm:w-45 sm:h-45 md:w-55 md:h-55 mx-auto rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
     </div>
+    <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
+  	<img src="{{ url_for('static', filename='images/エバノン ロー プレミアムグレー.jpg') }}" alt="Evanon Low Premium Gray"
+       		class="w-36 h-36 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+  	<img src="{{ url_for('static', filename='images/エバノン ロー プレミアムレッド.jpg') }}" alt="Evanon Low Premium Red"
+       		class="w-36 h-36 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+    </div>
 
     <!-- 抽選フォーム or 売り切れ表示 -->
     {% if sold_out %}
@@ -111,9 +121,7 @@
       <div class="price-text select-none text-sm sm:text-base md:text-lg mt-2">
         1回1000円
       </div>
-      <p class="mt-4 text-base sm:text-lg font-semibold text-red-600 select-none">
-        残り在庫：<span>{{ remaining_stock }}</span>足
-      </p>
+      
     {% endif %}
 
     <!-- カラー情報 -->
