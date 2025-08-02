@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>注意書き - スニーカーガチャ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
+  <div class="max-w-3xl bg-white p-8 rounded-xl shadow-lg space-y-6">
+    <h1 class="text-3xl font-bold mb-6 text-red-600">⚠️ 注意書き</h1>
+    
+    <p class="text-lg">
+      ・サイズやカラーは在庫次第で、選べない場合がございます。<br>
+      ・選べない場合は別のサイズやカラーをお選びいただきます。<br>
+      ・商品の発送には数日～数週間かかることがあります。<br>
+      ・その他、ご不明な点は下記メールまでお問い合わせください。<br>
+      <a href="mailto:kousaka0620s@gmail.com" class="text-blue-600 underline">kousaka0620s@gmail.com</a>
+    </p>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">🎯 ガチャ・景品情報</h2>
+      <ul class="list-disc list-inside space-y-1 text-base">
+        <li>ガチャ1回 2000円</li>
+        <li>Air Force1 '07 販売価格 ￥12,900 - ￥16,000</li>
+        <li>エバノン ロー プレミアム 販売価格 ￥4,900 - ￥7,980</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">📊 当選確率</h2>
+      <ul class="list-disc list-inside space-y-1 text-base">
+        <li>Air Force1 '07 2%</li>
+        <li>エバノン ロー プレミアム 8%</li>
+        <li>再挑戦チャンス 10%</li>
+        <li>はずれ(景品無し) 80%</li>
+      </ul>
+      <p class="text-sm mt-2 text-gray-600">
+        ※確率は各回独立しており、結果はランダムに決定されます。<br>
+        景品の当選を保証するものではありません。<br>
+        ※販売価格はAmazon.com の参考価格に基づく<br>
+        ※景品は譲渡不可。市場価値は変動する可能性がございます。<br>
+        ※再挑戦チャンスは本ガチャ1回分(2000円相当)の権利。譲渡・返金不可<br>
+        ※スニーカーの在庫が切れた場合、ガチャが一時的に引けなくなります。<br>
+        ※本ガチャは娯楽目的であり、過度な課金は避け、自己責任でご利用ください。<br>
+        ※ガチャの結果に関するクレームや返金は受け付けておりません。<br>
+        ※発送する品はすべて写真にて記録しております為、ご了承ください。<br>
+        ※万が一届いた品に不備があった場合、下記メールアドレスまでお問い合わせください。<br>
+        <a href="mailto:kousaka0620s@gmail.com" class="text-blue-600 underline">kousaka0620s@gmail.com</a>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">～最後に～</h2>
+      <p class="text-lg font-semibold">
+        当選した際にはぜひ<br>
+        <span class="text-purple-600">#kicklotto</span> でSNSにて当選報告をお願いいたします！！
+      </p>
+    </section>
+
+    <a href="{{ url_for('index') }}" class="text-blue-600 underline hover:text-blue-800 block mt-6">
+      ← トップページに戻る
+    </a>
+
+    <p class="mt-8 text-sm text-gray-500 text-center">
+      kicklotto 代表 コウサカ
+    </p>
+  </div>
+</body>
+</html>

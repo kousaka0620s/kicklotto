@@ -1,0 +1,14 @@
+<!-- templates/confirm.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>支払い確認</title>
+</head>
+<body>
+    <h2>5000円の支払いを確認してください</h2>
+　　<form action="{{ url_for('gacha') }}" method="post">
+  	<button type="submit">5000円払いました！ガチャを回す</button>
+　　</form>
+
+</body>
+</html>

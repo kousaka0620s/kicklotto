@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>スニーカーガチャ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .spin { animation: spin 0.5s linear; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .pulse:hover { animation: pulse 0.8s infinite; }
+
+    @keyframes crazyBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .crazy-bg {
+      background: linear-gradient(45deg, #ff0044, #ffcc00, #ff0044, #ffcc00);
+      background-size: 400% 400%;
+      animation: crazyBackground 8s ease infinite;
+    }
+
+    .hot-text {
+      font-family: 'Anton', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: #ff0000;
+      text-shadow:
+        0 0 8px #ff0000,
+        0 0 16px #ff6600,
+        0 0 24px #ffcc00,
+        0 0 32px #ffcc00;
+      animation: flicker 1.5s infinite alternate;
+      user-select: none;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .price-text {
+      font-weight: 700;
+      color: #b91c1c;
+      margin-top: 0.5rem;
+      text-shadow: 1px 1px 2px #7f1d1d;
+      user-select: none;
+    }
+  </style>
+</head>
+<body class="crazy-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30"></div>
+
+  <div class="relative text-center p-6 sm:p-10 bg-white bg-opacity-90 rounded-3xl shadow-2xl max-w-6xl w-full z-10">
+
+    <!-- 当選率 -->
+    <div class="absolute top-4 right-4 text-right text-xs sm:text-sm md:text-base font-bold text-red-600 bg-white bg-opacity-80 p-2 rounded-xl shadow-md leading-relaxed select-none">
+      <div class="hot-text !text-base sm:!text-lg">確率一覧</div>
+      <div class="mt-1">Air Force1 '07：<span class="text-red-700">1/50</span></div>
+      <div>エバノン ロー プレミアム：<span class="text-red-700">1/12.5</span></div>
+      <div>再挑戦チャンス：<span class="text-red-700">1/10</span></div>
+    </div>
+
+    <!-- タイトル -->
+    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 mb-4 leading-relaxed">
+      Air Force1 '07をつかみ取れ！！
+    </h1>
+
+    <p class="text-base sm:text-lg md:text-xl text-gray-800 mb-2 font-semibold">2000円でスニーカーをゲット🔥</p>
+
+    <!-- 注意書き -->
+    <p class="text-xs sm:text-sm text-yellow-600 font-bold mb-8 bg-yellow-100 inline-block px-3 py-1 rounded-lg shadow-md">
+      ※色,サイズ は当選後に選択できます
+    </p>
+
+    <!-- スニーカー画像 -->
+    <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4 justify-center">
+      <img src="{{ url_for('static', filename='images/air_force1_white.jpg') }}" alt="Nike Air Force 1 White"
+           class="w-45 h-45 sm:w-45 sm:h-45 md:w-55 md:h-55 mx-auto rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+      <img src="{{ url_for('static', filename='images/air_force1_black.jpg') }}" alt="Nike Air Force 1 Black"
+           class="w-45 h-45 sm:w-45 sm:h-45 md:w-55 md:h-55 mx-auto rounded-lg shadow-md hover:scale-105 transition-transform duration-300">
+    </div>
+
+    <!-- 抽選フォーム or 売り切れ表示 -->
+    {% if sold_out %}
+      <p class="text-red-500 text-xl sm:text-2xl font-bold mt-8">
+        🎉 ガチャは終了しました！<br>次回開催をお楽しみに。
+      </p>
+    {% else %}
+      <form action="{{ url_for('create_checkout_session') }}" method="POST">
+        <button type="submit"
+          class="bg-gradient-to-r from-yellow-400 to-red-500 text-white font-bold text-lg sm:text-xl md:text-2xl py-3 sm:py-4 px-6 sm:px-10 rounded-full
+                 hover:from-yellow-500 hover:to-red-600 transition duration-300 transform pulse
+                 shadow-xl border-4 border-purple-500"
+          id="gachaButton">
+          🎰 ガチャをぶん回す！！
+        </button>
+      </form>
+      <div class="price-text select-none text-sm sm:text-base md:text-lg mt-2">
+        1回1000円
+      </div>
+      <p class="mt-4 text-base sm:text-lg font-semibold text-red-600 select-none">
+        残り在庫：<span>{{ remaining_stock }}</span>足
+      </p>
+    {% endif %}
+
+    <!-- カラー情報 -->
+    <div class="text-left mt-10 sm:mt-12 px-4 sm:px-10 text-sm sm:text-base text-gray-700">
+      <h2 class="font-bold text-lg mb-2">🎨 カラー</h2>
+      <ul class="list-disc list-inside">
+        <li>Air Force1 '07 ブラック or ホワイト</li>
+        <li>エバノン ロー プレミアム ユニバーシティレッド or ウルフグレー</li>
+      </ul>
+    </div>
+
+    <!-- サイズ注意 -->
+    <div class="mt-6 px-4 sm:px-10 text-xs sm:text-sm text-red-600 font-semibold text-left">
+      ※サイズ,カラー は在庫次第で、選べない物もございます<br>
+      その際は別のサイズ,カラー をお選び頂きます
+    </div>
+
+  </div>
+
+  <!-- 右下固定の「必ず読んでね」と注意書きリンク -->
+  <div class="fixed bottom-16 right-4 flex flex-col items-end space-y-1 z-50">
+   <h1 class="text-2xl font-extrabold text-white bg-black bg-opacity-70 px-4 py-1 rounded drop-shadow-lg select-none">
+      必ず読んでね↓↓↓
+    </h1>
+    <a href="{{ url_for('notice') }}"
+       class="bg-yellow-300 hover:bg-yellow-400 text-yellow-900 font-semibold py-2 px-4 rounded-lg shadow-lg transition"
+       target="_blank" rel="noopener noreferrer">
+      ⚠️ 注意書きページへ
+    </a>
+  </div>
+
+  <script>
+    document.getElementById('gachaButton')?.addEventListener('click', function() {
+      this.classList.add('spin');
+      setTimeout(() => {
+        this.classList.remove('spin');
+      }, 500);
+    });
+  </script>
+</body>
+</html>

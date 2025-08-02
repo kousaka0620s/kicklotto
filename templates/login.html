@@ -1,0 +1,15 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8"><title>ログイン</title></head>
+<body>
+  <h2>管理画面ログイン</h2>
+  {% if error %}
+    <p style="color:red;">{{ error }}</p>
+  {% endif %}
+  <form method="POST">
+    <input type="password" name="password" placeholder="パスワード">
+    <input type="submit" value="ログイン">
+  </form>
+</body>
+</html>

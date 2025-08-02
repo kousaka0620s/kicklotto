@@ -1,0 +1,24 @@
+<!-- templates/winner_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>当選者情報入力フォーム</title>
+</head>
+<body>
+    <h1>おめでとうございます！当選しました！</h1>
+    <p>以下のフォームに必要事項をご記入ください。</p>
+    <form action="/winner_submit" method="POST">
+        <label for="name">名前:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="address">住所:</label><br>
+        <textarea id="address" name="address" rows="3" cols="40" required></textarea><br><br>
+
+        <label for="email">メールアドレス:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <button type="submit">送信</button>
+    </form>
+</body>
+</html>

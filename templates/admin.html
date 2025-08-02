@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>当選者一覧（管理者用）</title>
+</head>
+<body>
+    <h1>当選者一覧</h1>
+    
+    <a href="/download_csv">
+        <button>CSVをダウンロード</button>
+    </a>
+
+    {% if winners %}
+    <table border="1">
+    <thead>
+        <tr>
+            {% for header in headers %}
+            <th>{{ header }}</th>
+            {% endfor %}
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in winners %}
+        <tr>
+            {% for item in row %}
+            <td>{{ item }}</td>
+            {% endfor %}
+            <td>
+                <form action="{{ url_for('update_status', row_num=loop.index0) }}" method="post" style="display:inline;">
+                    <button type="submit">
+                        {% if row[4] == '発送済み' %}
+                            未発送に戻す
+                        {% else %}
+                            発送済みにする
+                        {% endif %}
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    {% else %}
+    <p>まだ当選者のデータはありません。</p>
+    {% endif %}
+</body>
+</html>
