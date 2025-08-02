@@ -169,7 +169,7 @@ def create_checkout_session():
             line_items=[{
                 'price_data': {
                     'currency': 'jpy',
-                    'unit_amount': 1000,
+                    'unit_amount': 2000,
                     'product_data': {'name': 'スニーカーガチャ'},
                 },
                 'quantity': 1,
