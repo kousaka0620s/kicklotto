@@ -1,0 +1,2 @@
+# kicklotto
+Flaskで作ったスニーカーガチャ
