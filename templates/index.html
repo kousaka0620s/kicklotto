@@ -104,25 +104,25 @@
     </div>
 
     <!-- 抽選フォーム or 売り切れ表示 -->
-    {% if sold_out %}
-      <p class="text-red-500 text-xl sm:text-2xl font-bold mt-8">
-        🎉 ガチャは終了しました！<br>次回開催をお楽しみに。
-      </p>
-    {% else %}
-      <form action="{{ url_for('create_checkout_session') }}" method="POST">
-        <button type="submit"
-          class="bg-gradient-to-r from-yellow-400 to-red-500 text-white font-bold text-lg sm:text-xl md:text-2xl py-3 sm:py-4 px-6 sm:px-10 rounded-full
-                 hover:from-yellow-500 hover:to-red-600 transition duration-300 transform pulse
-                 shadow-xl border-4 border-purple-500"
-          id="gachaButton">
-          🎰 ガチャをぶん回す！！
-        </button>
-      </form>
-      <div class="price-text select-none text-sm sm:text-base md:text-lg mt-2">
-        1回2000円
-      </div>
-      
-    {% endif %}
+    <!-- フォーム部分のみ更新 -->
+{% if sold_out %}
+  <p class="text-red-500 text-xl sm:text-2xl font-bold mt-8">
+    🎉 ガチャは終了しました！<br>次回開催をお楽しみに。
+  </p>
+{% else %}
+  <form action="{{ url_for('create_paypal_session') }}" method="POST">
+    <button type="submit"
+      class="bg-gradient-to-r from-yellow-400 to-red-500 text-white font-bold text-lg sm:text-xl md:text-2xl py-3 sm:py-4 px-6 sm:px-10 rounded-full
+             hover:from-yellow-500 hover:to-red-600 transition duration-300 transform pulse
+             shadow-xl border-4 border-purple-500"
+      id="gachaButton">
+      🎰 ガチャをぶん回す！！
+    </button>
+  </form>
+  <div class="price-text select-none text-sm sm:text-base md:text-lg mt-2">
+    1回2000円（PayPal決済対応）
+  </div>
+{% endif %}
 
     <!-- カラー情報 -->
     <div class="text-left mt-10 sm:mt-12 px-4 sm:px-10 text-sm sm:text-base text-gray-700">
