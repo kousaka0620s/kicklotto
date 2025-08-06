@@ -6,11 +6,18 @@ from datetime import datetime
 # import stripe  # Stripeをコメントアウト（不要）
 from dotenv import load_dotenv
 import paypalrestsdk  # PayPal SDKをインポート
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+print("Loaded .env")
+print("Client ID:", os.getenv("PAYPAL_CLIENT_ID"))
+print("Secret Key:", os.getenv("PAYPAL_CLIENT_SECRET"))
 
 app = Flask(__name__)
 app.secret_key = 'Seeyounexttime'
 
-load_dotenv()  # .envを読み込みます
+
 
 # Stripe関連の設定をコメントアウト
 # stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
@@ -181,6 +188,8 @@ def update_status(row_num):
 def create_paypal_session():
     if count_winners() >= MAX_WINNERS:
         return "ガチャは終了しました。", 403
+    print("🔍 PAYPAL_CLIENT_ID:", os.getenv("PAYPAL_CLIENT_ID"))
+    print("🔍 PAYPAL_CLIENT_SECRET:", os.getenv("PAYPAL_CLIENT_SECRET"))
     try:
         payment = paypalrestsdk.Payment({
             "intent": "sale",
@@ -197,11 +206,14 @@ def create_paypal_session():
         if payment.create():
             for link in payment.links:
                 if link.rel == "approval_url":
+                    print("🔍 Redirecting to:", link.href)
                     return redirect(link.href)
             return "エラー: 支払いリンクの生成に失敗しました", 500
         else:
+            print("⚠️ Payment creation failed:", payment.error)
             return f"エラー: 支払いセッションの作成に失敗しました - {payment.error}", 500
     except Exception as e:
+        print("⚠️ Exception:", str(e))
         return f"エラー: {str(e)}", 500
 
 # StripeのWebhookをコメントアウト
